@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Producción</title>
+  <!-- Enlace actualizado para el archivo CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Control de Producción</h1>
+
+    <!-- Campo de Fecha -->
+    <div class="form-section">
+      <label for="fechaRegistro">Fecha del Registro:</label>
+      <input type="date" id="fechaRegistro">
+    </div>
+
+    <!-- Sección de Datos de Producción -->
+    <div class="form-section">
+      <h2>Datos de Producción</h2>
+      <label for="formato">Formato:</label>
+      <select id="formato">
+        <option value="330 ml">330 ml</option>
+        <option value="600 ml">600 ml</option>
+      </select>
+      <label for="tipo">Tipo:</label>
+      <select id="tipo">
+        <option value="Natural">Natural</option>
+        <option value="Mineralizada">Mineralizada</option>
+      </select>
+      <label for="loteProduccion">Lote de Producción:</label>
+      <input type="number" id="loteProduccion" placeholder="Número de lote">
+      <label for="totalCajas">Total de Cajas:</label>
+      <input type="number" id="totalCajas" placeholder="Total de cajas" disabled>
+      <label for="totalPiezas">Total de Piezas:</label>
+      <input type="number" id="totalPiezas" placeholder="Total de piezas" disabled>
+    </div>
+
+    <!-- Sección de MP Usada -->
+    <div class="form-section">
+      <h2>Materias Primas Usadas</h2>
+      <!-- Material: Botella 1 -->
+      <div class="material">
+        <h3>Botella 1</h3>
+        <label>Lote:</label>
+        <input type="number" id="botella1_lote" placeholder="Número de lote">
+        <label>Cajas:</label>
+        <input type="number" id="botella1_cajas" placeholder="Número de cajas" onchange="calculatePiezas('botella1')">
+        <label>Piezas:</label>
+        <input type="number" id="botella1_piezas" placeholder="Número de piezas" disabled>
+      </div>
+      <!-- Material: Botella 2 -->
+      <div class="material">
+        <h3>Botella 2</h3>
+        <label>Lote:</label>
+        <input type="number" id="botella2_lote" placeholder="Número de lote">
+        <label>Cajas:</label>
+        <input type="number" id="botella2_cajas" placeholder="Número de cajas" onchange="calculatePiezas('botella2')">
+        <label>Piezas:</label>
+        <input type="number" id="botella2_piezas" placeholder="Número de piezas" disabled>
+      </div>
+    </div>
+
+    <!-- Sección de MP Merma y (%) -->
+    <div class="form-section">
+      <h2>MP Merma y (%)</h2>
+      <!-- Material: Botella -->
+      <div class="merma">
+        <h3>Botella</h3>
+        <label>Merma:</label>
+        <input type="number" id="botella_merma" placeholder="Cantidad de merma" onchange="updateTotalUsado('botella')">
+        <label>Total Usado:</label>
+        <input type="number" id="botella_total_usado" placeholder="Total usado" disabled>
+        <label>Porcentaje:</label>
+        <input type="text" id="botella_porcentaje" placeholder="%" disabled>
+      </div>
+      <!-- Material: Etiqueta -->
+      <div class="merma">
+        <h3>Etiqueta</h3>
+        <label>Merma:</label>
+        <input type="number" id="etiqueta_merma" placeholder="Cantidad de merma" onchange="updateTotalUsado('etiqueta')">
+        <label>Total Usado:</label>
+        <input type="number" id="etiqueta_total_usado" placeholder="Total usado" disabled>
+        <label>Porcentaje:</label>
+        <input type="text" id="etiqueta_porcentaje" placeholder="%" disabled>
+      </div>
+      <!-- Material: Tapa -->
+      <div class="merma">
+        <h3>Tapa</h3>
+        <label>Merma:</label>
+        <input type="number" id="tapa_merma" placeholder="Cantidad de merma" onchange="updateTotalUsado('tapa')">
+        <label>Total Usado:</label>
+        <input type="number" id="tapa_total_usado" placeholder="Total usado" disabled>
+        <label>Porcentaje:</label>
+        <input type="text" id="tapa_porcentaje" placeholder="%" disabled>
+      </div>
+    </div>
+
+    <!-- Sección de MP Suministrada -->
+    <div class="form-section">
+      <h2>Materias Primas Suministradas</h2>
+      <div id="mpSuministrada">
+        <!-- Material Fijo: Botella -->
+        <div class="supply-row supplied">
+          <label>Material:</label>
+          <input type="text" class="supplyName" value="Botella">
+          <label>Cantidad:</label>
+          <input type="number" class="supplyCantidad" placeholder="Cantidad">
+          <label>Unidad:</label>
+          <select class="supplyUnidad">
+            <option value="PZA">PZA</option>
+            <option value="M">M</option>
+          </select>
+          <label>Lote:</label>
+          <input type="number" class="supplyLote" placeholder="Número de lote">
+        </div>
+      </div>
+      <button onclick="addSupplied()">Agregar Suministro</button>
+      <button onclick="removeSupplied()" style="background-color: #dc3545; margin-top: 5px;">Eliminar Suministro</button>
+    </div>
+
+    <!-- Botones para Guardar y Consultar Registro -->
+    <div class="form-section">
+      <button onclick="guardarRegistro()">Guardar Registro</button>
+      <button onclick="consultarRegistro()">Consultar Registro</button>
+    </div>
+
+    <!-- Sección para Mostrar Resultados de la Consulta -->
+    <div class="form-section result-section" id="resultadoConsulta">
+      <h2>Resultado de la Consulta</h2>
+      <p id="datosConsulta">No hay datos para mostrar</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
