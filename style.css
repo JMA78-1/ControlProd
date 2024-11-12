@@ -124,21 +124,25 @@ button[onclick="removeSupplied()"]:hover {
   background-color: #ffffff;
 }
 
+/* Estilos específicos para cada fila de suministro en Materias Primas Suministradas */
 .supply-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
 }
 
 .supply-row label {
-  width: 80px;
-  font-weight: normal;
+  width: 100px; /* Ajuste de ancho para las etiquetas */
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .supply-row input,
 .supply-row select {
   flex: 1;
-  margin-bottom: 0;
+  min-width: 120px; /* Tamaño mínimo para legibilidad */
+  margin-bottom: 5px;
 }
 
 /* Resultados */
